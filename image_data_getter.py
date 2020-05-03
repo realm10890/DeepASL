@@ -3,6 +3,7 @@ import numpy as np
 
 
 cap = cv2.VideoCapture(0)
+img_counter = 0
 
 while True:
     _, frame = cap.read()
@@ -29,6 +30,13 @@ while True:
 
     if key == 27:
         break
+
+    elif k%256 == 32:
+        # SPACE pressed
+        img_name = "/Users/cesaralmendarez/Desktop/DeepASL/test_images/opencv_frame_{}.png".format(img_counter)
+        cv2.imwrite(img_name, maskROI)
+        print("{} written!".format(img_name))
+        img_counter += 1
 
 cap.release()
 cv2.destroyAllWindows()
