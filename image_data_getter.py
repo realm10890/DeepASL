@@ -3,12 +3,12 @@ import numpy as np
 
 
 cap = cv2.VideoCapture(0)
-img_counter = 0
+img_counter = 501
 
 while True:
     _, frame = cap.read()
 
-    #cv2.rectangle(frame, (300, 300), (600, 600), (0, 0, 0), 2)
+    cv2.rectangle(frame, (300, 300), (600, 600), (0, 0, 0), 2)
 
     hsv = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
 
@@ -31,11 +31,14 @@ while True:
     if key == 27:
         break
 
-    elif k%256 == 32:
+    elif key%256 == 32:
         # SPACE pressed
-        img_name = "/Users/cesaralmendarez/Desktop/DeepASL/test_images/opencv_frame_{}.png".format(img_counter)
+        img_name = "/Users/cesaralmendarez/Desktop/DeepASL/test_images/test_image_l/opencv_frame_{}.png".format(img_counter)
+
         cv2.imwrite(img_name, maskROI)
+
         print("{} written!".format(img_name))
+
         img_counter += 1
 
 cap.release()
