@@ -1,0 +1,2 @@
+input is hardcoded so now try without hardcode
+-take picture and then type in label and evaluate, machines predicted output.

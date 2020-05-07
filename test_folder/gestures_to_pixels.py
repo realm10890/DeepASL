@@ -28,7 +28,7 @@ for filename2 in os.listdir(image_dir_l):
         train_images_asl_bnp.append(grayreadimg2)
 
 train_images = np.array(train_images_asl_bnp)
-print(train_images)
+print(train_images[700])
 
 #training labels an array of 1000 elements 500 0's and 500 1's [0 x 500, 1 x 500]
 zeros = np.full((1, 500), 0)
@@ -36,4 +36,4 @@ ones = np.full((1, 500), 1)
 finalZeros = zeros.ravel()
 finalOnes = ones.ravel()
 train_labels = np.concatenate([finalZeros, finalOnes])
-print(train_labels)
+print(train_labels[700])

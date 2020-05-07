@@ -32,19 +32,24 @@ for filename2 in os.listdir(image_dir_l):
         train_images_asl_bnp.append(grayreadimg2)
 
 train_images = np.array(train_images_asl_bnp)
-print(train_images)
+
 
 #training labels an array of 1000 elements 500 0's and 500 1's [0 x 500, 1 x 500]
 zeros = np.full((1, 500), 0)
 ones = np.full((1, 500), 1)
 finalZeros = zeros.ravel()
 finalOnes = ones.ravel()
+
 train_labels = np.concatenate([finalZeros, finalOnes])
-print(train_labels)
+
+test_images = train_images[:1]
+test_labels = train_labels[:1]
+
 
 conv = Conv3x3(8)                  # 28x28x1 -> 26x26x8
 pool = MaxPool2()                  # 26x26x8 -> 13x13x8
-softmax = Softmax(13 * 13 * 8, 10)  # 13x13x8 -> 10
+#softmax = Softmax(13 * 13 * 8, 10)  # 13x13x8 -> 10
+softmax = Softmax(13 * 13 * 8, 2)
 
 
 def forward(image, label):
@@ -88,6 +93,12 @@ def forward(image, label):
     print("Eval On Model Output")
     print(rightOrWrong)
     """""
+    print("Predicted Output")
+    print(np.argmax(out))
+    print("Actual Output")
+    print(label)
+    print("Eval On Model Output")
+    print(rightOrWrong)
 
     return out, loss, acc
 
@@ -155,7 +166,13 @@ for im, label in zip(test_images, test_labels):
     num_correct += acc
 
 num_tests = len(test_images)
+print("num tests")
+print(num_tests)
+print("loss")
+print(loss)
 print('Test Loss:', loss / num_tests)
+print("num correct ")
+print(num_correct)
 print('Test Accuracy:', num_correct / num_tests)
 
 '''
